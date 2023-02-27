@@ -40,18 +40,18 @@ def main():
     ENC = Encoder().to(DEVICE)
     DEC = Decoder().to(DEVICE)
 
-    # train_loss_list = train_loop(ENC, DEC, train_loader, EPOCHS, LEARNING_RATE, DEVICE)
-    # test_loss_list = test_loop(ENC, DEC, test_loader, DEVICE)
-    #
-    # visualized_loss_in_train_test(train_loss_list, test_loss_list)
+    train_loss_list = train_loop(ENC, DEC, train_loader, EPOCHS, LEARNING_RATE, DEVICE)
+    test_loss_list = test_loop(ENC, DEC, test_loader, DEVICE)
 
-    # embed = embedding(ENC, full_loader, DEVICE)
-    #
-    # numpy_embedding = embed.cpu().detach().numpy()
-    # num_images = numpy_embedding.shape[0]
-    #
-    # flattened_embedding = numpy_embedding.reshape((num_images, -1))
-    # np.save(EMBEDDING_DIR, flattened_embedding)
+    visualized_loss_in_train_test(train_loss_list, test_loss_list)
+
+    embed = embedding(ENC, full_loader, DEVICE)
+
+    numpy_embedding = embed.cpu().detach().numpy()
+    num_images = numpy_embedding.shape[0]
+
+    flattened_embedding = numpy_embedding.reshape((num_images, -1))
+    np.save(EMBEDDING_DIR, flattened_embedding)
 
     num_images = 5
     embed = np.load(EMBEDDING_DIR)
